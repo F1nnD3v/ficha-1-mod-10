@@ -22,10 +22,8 @@ public class VerJogadoresActivity extends AppCompatActivity {
         Bundle args = getIntent().getBundleExtra("ArrayJogadores");
         ArrayList<Jogador> jogadores = (ArrayList<Jogador>) args.getSerializable("ArrayList");
 
-        recyclerView = findViewById(R.id.rvJogadores);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adaptador = new RecyclerView.Adapter(dadosJogadores);
-        recyclerView.setAdapter(adaptador);
+        for (int i = 0;i< jogadores.size(); i++){
+            MeuAdapter meuAdapter = new MeuAdapter(this, jogadores.get(i).getNome()x)
+        }
     }
 }
