@@ -9,7 +9,6 @@ import android.os.Bundle;
 import java.util.ArrayList;
 
 public class VerJogadoresActivity extends AppCompatActivity {
-    String[] dadosJogadores;
     RecyclerView recyclerView;
     RecyclerView.Adapter adaptador;
     RecyclerView.LayoutManager layoutManager;
@@ -22,8 +21,20 @@ public class VerJogadoresActivity extends AppCompatActivity {
         Bundle args = getIntent().getBundleExtra("ArrayJogadores");
         ArrayList<Jogador> jogadores = (ArrayList<Jogador>) args.getSerializable("ArrayList");
 
-        for (int i = 0;i< jogadores.size(); i++){
-            MeuAdapter meuAdapter = new MeuAdapter(this, jogadores.get(i).getNome()x)
+        String nomes[] = null, equipas[] = null;
+        int idades[] = null, numeroCamisolas[] = null;
+
+
+        for(int i = 0; i<jogadores.size(); i++){
+            nomes[i] = jogadores.get(i).getNome();
+            idades[i] = jogadores.get(i).getIdade();
+            equipas[i] = jogadores.get(i).getEquipa();
+            numeroCamisolas[i] = jogadores.get(i).getNumeroCamisola();
         }
+
+        MeuAdapter meuAdapter = new MeuAdapter(this,nomes,idades,equipas,numeroCamisolas);
+
+        recyclerView.setAdapter(meuAdapter);
+        recyclerView.setLayoutManager(layoutManager);
     }
 }

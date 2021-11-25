@@ -1,6 +1,7 @@
 package com.example.ficha1_mod10_ricardosilva_3016;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -29,23 +30,32 @@ public class MeuAdapter extends RecyclerView.Adapter<MeuAdapter.ViewHolder> {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View view = inflater.inflate(R.layout.rv_jogador, parent,false);
+                return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+                holder.lblNome.setText(nomes[position]);
+                holder.lblIdade.setText(idades[position]);
+                holder.lblEquipa.setText(equipas[position]);
+                holder.lblCamisola.setText(numerosCamisolas[position]);
         }
 
         @Override
         public int getItemCount() {
-                return 0;
+                return nomes.length;
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder{
-
+                TextView lblNome,lblIdade,lblEquipa,lblCamisola;
                 public ViewHolder(@NonNull View itemView) {
                         super(itemView);
+                        lblNome = itemView.findViewById(R.id.lblNome);
+                        lblIdade = itemView.findViewById(R.id.lblIdade);
+                        lblEquipa = itemView.findViewById(R.id.lblEquipa);
+                        lblCamisola = itemView.findViewById(R.id.lblNumeroCamisola);
                 }
         }
 }
