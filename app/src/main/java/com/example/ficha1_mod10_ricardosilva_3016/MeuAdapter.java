@@ -15,37 +15,36 @@ import java.util.ArrayList;
 
 public class MeuAdapter extends RecyclerView.Adapter<MeuAdapter.ViewHolder> {
 
-        String nomes[],equipas[];
-        int idades[],numerosCamisolas[];
+        private ArrayList<Jogador> listaJogadores;
         Context context;
 
-        public MeuAdapter(Context ct, String nomes[], int idades[], String equipas[], int numerosCamisolas[]){
-                this.context = ct;
-                this.nomes = nomes;
-                this.idades = idades;
-                this.equipas = equipas;
-                this.numerosCamisolas = numerosCamisolas;
+        public MeuAdapter(ArrayList<Jogador> listaJogadores){
+                this.listaJogadores = listaJogadores;
         }
 
         @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                LayoutInflater inflater = LayoutInflater.from(context);
-                View view = inflater.inflate(R.layout.rv_jogador, parent,false);
+        public MeuAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_jogador, parent,false);
                 return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-                holder.lblNome.setText(nomes[position]);
-                holder.lblIdade.setText(idades[position]);
-                holder.lblEquipa.setText(equipas[position]);
-                holder.lblCamisola.setText(numerosCamisolas[position]);
+
+                String nome = String.valueOf(listaJogadores.get(position).getNome());
+                String idade = String.valueOf(listaJogadores.get(position).getIdade());
+                String equipa = String.valueOf(listaJogadores.get(position).getEquipa());
+                String nCamisola = String.valueOf(listaJogadores.get(position).getNumeroCamisola());
+                holder.lblNome.setText(nome);
+                holder.lblIdade.setText(idade);
+                holder.lblEquipa.setText(equipa);
+                holder.lblCamisola.setText(nCamisola);
         }
 
         @Override
         public int getItemCount() {
-                return nomes.length;
+                return listaJogadores.size();
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder{

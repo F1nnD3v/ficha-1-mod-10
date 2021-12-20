@@ -1,10 +1,14 @@
 package com.example.ficha1_mod10_ricardosilva_3016;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,23 +22,31 @@ public class VerJogadoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_jogadores);
 
+        recyclerView= findViewById(R.id.rvJogadores);
         Bundle args = getIntent().getBundleExtra("ArrayJogadores");
         ArrayList<Jogador> jogadores = (ArrayList<Jogador>) args.getSerializable("ArrayList");
+        Button btnVoltar = findViewById(R.id.btnVoltar);
 
-        String nomes[] = null, equipas[] = null;
-        int idades[] = null, numeroCamisolas[] = null;
-
-
-        for(int i = 0; i<jogadores.size(); i++){
-            nomes[i] = jogadores.get(i).getNome();
-            idades[i] = jogadores.get(i).getIdade();
-            equipas[i] = jogadores.get(i).getEquipa();
-            numeroCamisolas[i] = jogadores.get(i).getNumeroCamisola();
-        }
-
-        MeuAdapter meuAdapter = new MeuAdapter(this,nomes,idades,equipas,numeroCamisolas);
+        MeuAdapter meuAdapter = new MeuAdapter(jogadores);
 
         recyclerView.setAdapter(meuAdapter);
         recyclerView.setLayoutManager(layoutManager);
+        setAdapter(jogadores);
+
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    private void setAdapter(ArrayList<Jogador> jogadores){
+        MeuAdapter adapter = new MeuAdapter(jogadores);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 }
